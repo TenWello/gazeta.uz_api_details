@@ -10,14 +10,12 @@ class GazetaNewsBatchDetailApi(APIView):
     parser_classes = [JSONParser]
 
     def get(self, request):
-        # 1) DB’dan: agar oldindan fetch_qazetauz bilan to‘ldirilgan bo‘lsa
         qs = GazetaNews.objects.exclude(title="").values(
             "title", "link", "time_ago", "full_text", "images"
         )
         return Response({"result": list(qs)}, status=status.HTTP_200_OK)
 
     def post(self, request):
-        # 2) yoki POST qilinsa, body.links bo‘yicha real-time fetch
         links = request.data.get("links")
         if not isinstance(links, list) or not links:
             return Response({"error": "links list required"}, status=status.HTTP_400_BAD_REQUEST)

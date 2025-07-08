@@ -1,4 +1,3 @@
-# news/models.py
 from django.db import models
 
 class GazetaNews(models.Model):
@@ -6,8 +5,8 @@ class GazetaNews(models.Model):
     link      = models.URLField(unique=True, max_length=500)
     time_ago  = models.CharField(max_length=100)
     full_text = models.TextField()
-    image     = models.URLField(max_length=500, blank=True)      # hozirgi bitta rasm
-    images    = models.JSONField(default=list, blank=True)       # bu — barchasi
+    image     = models.URLField(max_length=500, blank=True)      
+    images    = models.JSONField(default=list, blank=True)     
     created_at = models.DateTimeField(auto_now_add=True)
 
 
